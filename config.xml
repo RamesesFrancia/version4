@@ -9,6 +9,8 @@
     </author>
 	<plugin name="cordova-plugin-sms" source="npm" />
 	<gap:plugin name="cordova-plugin-sms" source="npm" />
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="/PhoneNumbers/jquery.PhoneNumbers.min.js"></script>
     <content src="index.html" />
 	<access origin="*" />
     <allow-intent href="http://*/*" />
