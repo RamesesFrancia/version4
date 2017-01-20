@@ -10,12 +10,6 @@
 	<!--for Sms Plugin-->
 	<plugin name="cordova-plugin-sms" source="npm" />
 	<gap:plugin name="cordova-plugin-sms" source="npm" />
-	<!--For Geolocation-->
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-		<script type="text/javascript">
-	<!--For phone call plugin-->
-		<script type="text/javascript" src="/PhoneNumbers/jquery.PhoneNumbers.min.js"></script>
-		<script type="text/javascript" src="cordova.js"></script>
 			
     <content src="index.html" />
 	<access origin="*" />
