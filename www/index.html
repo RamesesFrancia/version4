@@ -11,20 +11,6 @@
 	</a>
 </header>
 
-<!--this is for Firebase Server-->
-<script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyD8LwY7K8s6LHdcf4KJMT4nGEKHXLDZ5AA",
-    authDomain: "mersy-8711a.firebaseapp.com",
-    databaseURL: "https://mersy-8711a.firebaseio.com",
-    storageBucket: "mersy-8711a.appspot.com",
-    messagingSenderId: "220411730997"
-  };
-  firebase.initializeApp(config);
-</script>
-
 <body style="margin:0px">
 <center>
  
@@ -32,6 +18,8 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="/PhoneNumbers/jquery.PhoneNumbers.min.js"></script>
  
+ <!-- for Push Notification-->
+ <script type="text/javascript" src="index.js"></script>
  
 <!--Send Current Location "Panic Button/Distress Button"-->
 <a style="color:white;">Calling</a>
@@ -39,7 +27,7 @@
 <div class="round-button">
     <div class="round-button-circle round-button">
         <font color="white" style="verdana">
-		<a onclick="sendSMS()">ALERT!</font></a>
+		<a onclick="getPositionNow()">ALERT!</font></a>
     </div>
 </div>
  
@@ -73,7 +61,7 @@
    
    <!--For Email-->
         <a rel="external" href="mailto:NDRRMCReport@gmail.com?subject=Emergency/Crime Report"
-            onclick="window.open('mailto:CrimeReport@gmail.com', '_system');">
+            onclick="window.open('mailto:CrimeReport@gmail.com?subject=Emergency/Crime Report', '_system');">
                 <img src="images/email.png" width="15%" height="70px"/></img></a>
        
     <!--other emrgency hotlines-->
@@ -100,6 +88,7 @@
                 var test = navigator.geolocation.getCurrentPosition(function(position) {
                     lat = position.coords.latitude;
                     lng = position.coords.longitude;
+					sendSMS(lat,lng);
 					//window.open('sms:+639463482612?body= I need Help! My Location is '+"  Longitude:"+position.coords.longitude+" Latitude:"+position.coords.latitude, '_system' );
 					//alert("Your Current Location(Coordinates) is" + position.coords.latitude+' '+position.coords.longitude);
                 });
@@ -130,7 +119,6 @@
 				var message = "I need Help! My Location is "+"  Longitude:"+lng+" Latitude:"+lat;
 				console.log("number=" + number + ", message= " + message);
 				var smsplugin = cordova.require("info.asankan.phonegap.smsplugin.smsplugin");
-
 				//CONFIGURATION
 				var options = {
 					replaceLineBreaks: false, // true to replace \n by a new line, false by default
@@ -139,14 +127,11 @@
 						//intent: '' // send SMS without open any other app
 					}
 				};
-
 				var success = function () { alert('Message sent successfully'); };
 				var error = function (e) { alert('Message Failed:' + e); };
 				sms.send(number, message, options, success, error);
 			}
 		};**/
-</script>
-<script>
 	function ClickMe()
 	{
 		var messageInfo = {
@@ -160,9 +145,9 @@
 		});
 	}
 	
-	function sendSMS() {
-        	var sendto = "1234";
-        	var textmsg = "MESSAGE";
+	function sendSMS(lat,lng) {
+        	var sendto = "+639463482612";
+        	var textmsg = "Im in emergency at this location Latitude:"+lat+" Longitude:"+lng;
         	if(sendto.indexOf(";") >=0) {
         		sendto = sendto.split(";");
         		for(i in sendto) {
@@ -181,4 +166,26 @@
 			});
     }
 </script>
+<!--<script>
+	// Add to index.js or the first page that loads with your app.
+// For Intel XDK and please add this to your app.js.
+
+document.addEventListener('deviceready', function () {
+  // Enable to debug issues.
+  // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+  
+  var notificationOpenedCallback = function(jsonData) {
+    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  };
+
+  window.plugins.OneSignal
+    .startInit("594744251523")
+    .handleNotificationOpened(notificationOpenedCallback)
+    .endInit();
+  
+  // Call syncHashedEmail anywhere in your app if you have the user's email.
+  // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
+  // window.plugins.OneSignal.syncHashedEmail(userEmail);
+}, false);
+</script>-->
 </html>
