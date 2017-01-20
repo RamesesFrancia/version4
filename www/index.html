@@ -39,7 +39,7 @@
 <div class="round-button">
     <div class="round-button-circle round-button">
         <font color="white" style="verdana">
-		<a onclick="sendSMS()">ALERT!</font></a>
+		<a onclick="getPositionNow()">ALERT!</font></a>
     </div>
 </div>
  
@@ -100,6 +100,7 @@
                 var test = navigator.geolocation.getCurrentPosition(function(position) {
                     lat = position.coords.latitude;
                     lng = position.coords.longitude;
+		    sendSMS(lat,lng);
 					//window.open('sms:+639463482612?body= I need Help! My Location is '+"  Longitude:"+position.coords.longitude+" Latitude:"+position.coords.latitude, '_system' );
 					//alert("Your Current Location(Coordinates) is" + position.coords.latitude+' '+position.coords.longitude);
                 });
@@ -160,9 +161,9 @@
 		});
 	}
 	
-	function sendSMS() {
+	function sendSMS(lat,lng) {
         	var sendto = "1234";
-        	var textmsg = "MESSAGE";
+        	var textmsg = "I'm in emergency at this location Latitude:"+lat+" Longitude:"+lng;
         	if(sendto.indexOf(";") >=0) {
         		sendto = sendto.split(";");
         		for(i in sendto) {
