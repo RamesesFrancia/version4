@@ -7,10 +7,9 @@
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
     </author>
-	<!--for Sms Plugin-->
 	<plugin name="cordova-plugin-sms" source="npm" />
 	<gap:plugin name="cordova-plugin-sms" source="npm" />
-			
+	<plugin name="com.phonegap.plugins.PushPlugin" source="npm"/>
     <content src="index.html" />
 	<access origin="*" />
     <allow-intent href="http://*/*" />
@@ -32,4 +31,7 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <access origin="*" />
-</widget>
+	
+
+
+  </widget>
